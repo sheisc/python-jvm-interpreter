@@ -4,6 +4,7 @@ class InstanceTest {
     public int num;
 
     public InstanceTest() {
+        System.out.println("InstanceTest()");
         num = 0;
     }
 

@@ -5,6 +5,7 @@ from pyjvm.jstdlib.StdlibLoader import load_stdlib_classes
 
 class JVMTest(unittest.TestCase):
     def setUp(self):
+        #print("JVMTest.setUp(self)")
         self.jvm = Machine()
         load_stdlib_classes(self.jvm)
         self.jvm.load_class_file('example/IntegerTest.class')
@@ -109,5 +110,26 @@ class ArrayTest(unittest.TestCase):
         r = self.jvm.call_function('jvmtest/ArrayTest/loopMultipleArray')
         self.assertEqual(r, 'aA1\nbB2\ncC3\n')
 
+
+class Hello(unittest.TestCase):
+    def setUp(self):
+        self.jvm = Machine()
+        load_stdlib_classes(self.jvm)
+        self.jvm.load_class_file('example/Hello.class')
+        # We must load the class files used in Hello.java
+        self.jvm.load_class_file('example/Data.class')
+        self.jvm.load_class_file('example/TestImport.class')
+
+    def test_main(self):
+        args = ["Hello", "2022"]
+        self.jvm.call_function('com/gkbrk/JVMTest/Hello/main', args)
+        print("test_main()")
+        #self.assertEqual(r, None)
+        #self.assertEqual(l, [1, 3, 4, 5])
+
 if __name__ == '__main__':
-    unittest.main()
+    #unittest.main()
+
+    h = Hello()
+    h.setUp()
+    h.test_main()

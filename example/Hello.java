@@ -3,6 +3,17 @@ package com.gkbrk.JVMTest;
 import com.gkbrk.JVMTest.TestImport;
 import jstdlib.Rng;
 
+class Data{
+    public int data;
+    public Data(int d){
+        this.data = d;
+        System.out.println("Data()");
+    }
+    public void test(){
+        System.out.println("Data.test(" + this.data + ")");
+    }
+}
+
 class Hello {
     public static final String greeting = "Hi";
 
@@ -11,6 +22,10 @@ class Hello {
         TestImport.runA();
         TestImport.runA();
         TestImport t = new TestImport();
+        Data d = new Data(2022);
+        d.test();
+        System.out.println(args[0] + " " + 2022);
+        //System.out.println(args[0]);
         for (int i = 0; i < 5; i++) {
             System.out.println("Test " + i);
         }

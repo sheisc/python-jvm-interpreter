@@ -384,9 +384,10 @@ class Machine:
             inst = Inst(code[frame.ip])
             #print(frame.ip, inst)
 
-            if len(frame.stack) > frame.max_stack + 1:
-                print("MAX STACK")
-                break
+            # commented by iron, 2022.01.31
+            #if len(frame.stack) > frame.max_stack + 1:
+            #    print("MAX STACK")
+            #    break
 
             if inst in OPCODES:
                 OPCODES[inst](frame)
@@ -653,6 +654,8 @@ class Machine:
                     frame.stack.append(obj)
                 else:
                     frame.stack.append(None)
+            else:
+                print("Unsupported Iinstruction: {0}".format(inst))
 
             #print(frame.stack, frame.locals)
             frame.ip += 1
